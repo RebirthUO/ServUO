@@ -85,6 +85,7 @@ namespace Server
 				idx.Write(start);
 
 				m.Serialize(bin);
+				m.WriteCustomData(bin);
 
 				if (metrics != null)
 				{
@@ -143,6 +144,7 @@ namespace Server
 				idx.Write(start);
 
 				item.Serialize(bin);
+				item.WriteCustomData(bin);
 
 				if (metrics != null)
 				{
@@ -191,6 +193,7 @@ namespace Server
 				idx.Write(start);
 
 				guild.Serialize(bin);
+				guild.WriteCustomData(bin);
 
 				if (metrics != null)
 				{

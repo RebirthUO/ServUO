@@ -502,7 +502,8 @@ namespace Server
 								LoadingType = entry.TypeName;
 
 								m.Deserialize(reader);
-
+								m.ReadCustomData(reader);
+								
 								if (reader.Position != (entry.Position + entry.Length))
 								{
 									throw new Exception($"***** Bad serialize on {m.GetType()} *****");
@@ -547,7 +548,8 @@ namespace Server
 								LoadingType = entry.TypeName;
 
 								item.Deserialize(reader);
-
+								item.ReadCustomData(reader);
+								
 								if (reader.Position != (entry.Position + entry.Length))
 								{
 									throw new Exception($"***** Bad serialize on {item.GetType()} *****");
@@ -592,7 +594,8 @@ namespace Server
 							try
 							{
 								g.Deserialize(reader);
-
+								g.ReadCustomData(reader);
+								
 								if (reader.Position != (entry.Position + entry.Length))
 								{
 									throw new Exception($"***** Bad serialize on Guild {g.Id} *****");

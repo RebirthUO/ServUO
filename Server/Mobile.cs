@@ -17,6 +17,8 @@ using Server.Menus;
 using Server.Mobiles;
 using Server.Network;
 using Server.Prompts;
+using Server.RebirthUO.CustomDataSerializer;
+using Server.RebirthUO.CustomModuleMarker;
 using Server.Targeting;
 #endregion
 
@@ -528,7 +530,7 @@ namespace Server
 	///     Base class representing players, npcs, and creatures.
 	/// </summary>
 	[System.Runtime.InteropServices.ComVisible(true)]
-	public class Mobile : IEntity, IHued, IComparable<Mobile>, ISerializable, ISpawnable, IDamageable
+	public class Mobile : IEntity, IHued, IComparable<Mobile>, ISerializable, ISpawnable, IDamageable, ICustomData
 	{
 		#region CompareTo(...)
 		public int CompareTo(IEntity other)
@@ -12631,6 +12633,18 @@ namespace Server
 		/// </summary>
 		public virtual void OnSectorDeactivate()
 		{ }
+
+		[CustomModule(CustomModule.Serialization)]
+		public virtual void WriteCustomData(GenericWriter writer)
+		{
+			writer.Write(0);
+		}
+
+		[CustomModule(CustomModule.Serialization)]
+		public virtual void ReadCustomData(GenericReader reader)
+		{
+			reader.ReadInt();
+		}
 	}
 }
 

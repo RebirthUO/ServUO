@@ -113,6 +113,7 @@ namespace Server
 				var startPosition = writer.Position;
 
 				item.Serialize(writer);
+				item.WriteCustomData(writer);
 
 				var size = (int)(writer.Position - startPosition);
 
@@ -154,6 +155,7 @@ namespace Server
 				var startPosition = writer.Position;
 
 				mobile.Serialize(writer);
+				mobile.WriteCustomData(writer);
 
 				var size = (int)(writer.Position - startPosition);
 
@@ -191,6 +193,7 @@ namespace Server
 				var startPosition = writer.Position;
 
 				guild.Serialize(writer);
+				guild.WriteCustomData(writer);
 
 				var size = (int)(writer.Position - startPosition);
 

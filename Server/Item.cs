@@ -12,6 +12,8 @@ using System.Threading;
 using Server.ContextMenus;
 using Server.Items;
 using Server.Network;
+using Server.RebirthUO.CustomDataSerializer;
+using Server.RebirthUO.CustomModuleMarker;
 using Server.Targeting;
 #endregion
 
@@ -776,7 +778,7 @@ namespace Server
 		VisList = 0x200,
 	}
 
-	public class Item : IEntity, IHued, IComparable<Item>, ISerializable, ISpawnable
+	public class Item : IEntity, IHued, IComparable<Item>, ISerializable, ISpawnable, ICustomData
 	{
 		public static readonly List<Item> EmptyItems = new List<Item>();
 
@@ -6989,6 +6991,18 @@ namespace Server
 			return Sockets.Any(s => s.GetType() == t);
 		}
 		#endregion
+
+		[CustomModule(CustomModule.Serialization)]
+		public virtual void WriteCustomData(GenericWriter writer)
+		{
+			writer.Write(0);
+		}
+
+		[CustomModule(CustomModule.Serialization)]
+		public virtual void ReadCustomData(GenericReader reader)
+		{
+			reader.ReadInt();
+		}
 	}
 
 	[PropertyObject]

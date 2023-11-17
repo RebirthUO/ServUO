@@ -1,5 +1,8 @@
 #region References
 using System.Collections.Generic;
+using Server.RebirthUO.CustomDataSerializer;
+using Server.RebirthUO.CustomModuleMarker;
+
 #endregion
 
 namespace Server.Guilds
@@ -11,7 +14,7 @@ namespace Server.Guilds
 		Order
 	}
 
-	public abstract class BaseGuild : ISerializable
+	public abstract class BaseGuild : ISerializable,ICustomData
 	{
 		private readonly int m_Id;
 
@@ -119,6 +122,18 @@ namespace Server.Guilds
 		public override string ToString()
 		{
 			return System.String.Format("0x{0:X} \"{1} [{2}]\"", m_Id, Name, Abbreviation);
+		}
+
+		[CustomModule(CustomModule.Serialization)]
+		public virtual void WriteCustomData(GenericWriter writer)
+		{
+			writer.Write(0);
+		}
+
+		[CustomModule(CustomModule.Serialization)]
+		public virtual void ReadCustomData(GenericReader reader)
+		{
+			reader.ReadInt();
 		}
 	}
 }
