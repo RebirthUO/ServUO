@@ -939,7 +939,7 @@ namespace Server.Misc
 				AddBackground(0, 0, 160, 120, 5054);
 
 				AddButton(10, 10, 0xFB7, 0xFB9, 1, GumpButtonType.Reply, 0);
-				AddLabel(45, 10, 0x34, "ServUO");
+				AddLabel(45, 10, 0x34, "RebirthUO");
 
 				AddButton(10, 35, 0xFB7, 0xFB9, 2, GumpButtonType.Reply, 0);
 				AddLabel(45, 35, 0x34, "List of skills");
