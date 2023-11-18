@@ -8,6 +8,7 @@ using Server.Targeting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.RebirthUO.Modules.RatingValueSystem;
 
 namespace Server.SkillHandlers
 {
@@ -512,6 +513,13 @@ namespace Server.SkillHandlers
                     wepAttrs.SelfRepair = 0;
                 }
             }
+            
+            #region RatingValueSystem
+            if (GenericRating.CanBeReevaluated(item.Rating))
+            {
+	            item.Rating = RatingValue.Generic;
+            }
+            #endregion
         }
 
         public static void SetProperty(Item item, int id, int value)

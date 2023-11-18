@@ -8,6 +8,7 @@ using Server.Spells.Necromancy;
 using Server.Spells.Second;
 using Server.Targeting;
 using System;
+using Server.RebirthUO.Modules.RatingValueSystem;
 
 namespace Server.Items
 {
@@ -453,6 +454,10 @@ namespace Server.Items
             m_AosSkillBonuses = new AosSkillBonuses(this);
             m_SAAbsorptionAttributes = new SAAbsorptionAttributes(this);
             m_NegativeAttributes = new NegativeAttributes(this);
+            
+            #region RatingValueSystem
+            InternalRatingValue = RatingValue.Generic;
+            #endregion
         }
 
         public BaseTalisman(Serial serial)
@@ -1633,5 +1638,12 @@ namespace Server.Items
                 }
             }
         }
+
+        #region RatingValueSystem        
+        public override void AddItemRatingProperty(ObjectPropertyList list)
+        {
+	        RatingEngine.AddRating(this.Rating, list, () => BaseTalismanRating.GetRating(this));
+        }
+        #endregion
     }
 }

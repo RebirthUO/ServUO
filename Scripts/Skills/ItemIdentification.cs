@@ -4,6 +4,7 @@ using Server.SkillHandlers;
 using Server.Targeting;
 using System;
 using System.Collections.Generic;
+using Server.RebirthUO.Modules.RatingValueSystem;
 
 namespace Server.Items
 {
@@ -65,6 +66,13 @@ namespace Server.Items
                     item.PrivateOverheadMessage(MessageType.Label, 0x3B2, item.LabelNumber, from.NetState);
                 }
 
+                #region RatingValueSystem               
+                if (GenericRating.CanBeReevaluated(item.Rating))
+                {
+	                item.Rating = RatingValue.Generic;
+                }
+                #endregion
+                
                 if (item is Meteorite)
                 {
                     if (((Meteorite)item).Polished)

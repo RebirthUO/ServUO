@@ -8,6 +8,7 @@ using AMT = Server.Items.ArmorMaterialType;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.RebirthUO.Modules.RatingValueSystem;
 
 namespace Server.Items
 {
@@ -1851,6 +1852,10 @@ namespace Server.Items
             m_NegativeAttributes = new NegativeAttributes(this);
             m_AosWeaponAttributes = new AosWeaponAttributes(this);
             m_TalismanProtection = new TalismanAttribute();
+            
+            #region RatingValueSystem 
+            InternalRatingValue = RatingValue.Generic;
+            #endregion
         }
 
         public override bool CanEquip(Mobile from)
@@ -2950,5 +2955,16 @@ namespace Server.Items
                 InvalidateProperties();
             }
         }
+        
+        #region RatingValueSystem
+        public override void AddItemRatingProperty(ObjectPropertyList list)
+        {
+	        RatingEngine.AddRating(this.Rating, list, () =>
+	        {
+		        this.InternalRatingValue = BaseArmorValueRating.GetRating(this);
+		        return this.Rating;
+	        });
+        }
+        #endregion
     }
 }

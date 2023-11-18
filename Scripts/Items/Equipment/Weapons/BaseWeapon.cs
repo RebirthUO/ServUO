@@ -17,6 +17,8 @@ using Server.Misc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.RebirthUO.Modules.RatingValueSystem;
+
 #endregion
 
 namespace Server.Items
@@ -4166,6 +4168,10 @@ namespace Server.Items
             {
                 m_UsesRemaining = 150;
             }
+            
+            #region RatingValueSystem
+            Rating = RatingValue.Generic;
+            #endregion
         }
 
         public BaseWeapon(Serial serial)
@@ -5221,6 +5227,17 @@ namespace Server.Items
 
             return quality;
         }
+
+        #region RatingValueSystem
+        public override void AddItemRatingProperty(ObjectPropertyList list)
+        {
+	        RatingEngine.AddRating(Rating, list, () =>
+	        {
+		        InternalRatingValue = BaseWeaponRating.GetRating(this);
+		        return Rating;
+	        });
+        }
+        #endregion
 
         public virtual void DistributeMaterialBonus(CraftAttributeInfo attrInfo)
         {

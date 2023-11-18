@@ -52,6 +52,10 @@ namespace Server.Mobiles
                 Add(new GenericBuyInfo(typeof(NoxCrystal), 6, 999, 0xF8E, 0));
                 Add(new GenericBuyInfo(typeof(GraveDust), 3, 999, 0xF8F, 0));
 
+                #region RatingValueSystem
+                Add(new GenericBuyInfo(typeof(IDWand), 2500, 20, Utility.RandomList(0xDF2, 0xDF3, 0xDF4, 0xDF5), 0));
+            	#endregion
+
                 Type[] types = Loot.MageryScrollTypes;
 
                 int circles = 3;

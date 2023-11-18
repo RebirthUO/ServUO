@@ -3,6 +3,7 @@ using Server.Mobiles;
 using Server.Targeting;
 using System;
 using System.Collections.Generic;
+using Server.RebirthUO.Modules.RatingValueSystem;
 
 namespace Server.Engines.Craft
 {
@@ -297,6 +298,12 @@ namespace Server.Engines.Craft
                         {
                             ((FishingPole)item).DistributeMaterialBonus(attributes);
                         }
+                        #region RatingValueSystem
+		                if (GenericRating.CanBeReevaluated(item.Rating))
+		                {
+			                item.Rating = RatingValue.Generic;
+		                }
+		                #endregion
                         break;
                     }
                 case EnhanceResult.Failure:

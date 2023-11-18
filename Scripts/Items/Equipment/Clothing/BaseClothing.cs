@@ -5,6 +5,7 @@ using Server.Misc;
 
 using System;
 using System.Collections.Generic;
+using Server.RebirthUO.Modules.RatingValueSystem;
 
 namespace Server.Items
 {
@@ -697,6 +698,10 @@ namespace Server.Items
 
             m_SetAttributes = new AosAttributes(this);
             m_SetSkillBonuses = new AosSkillBonuses(this);
+            
+            #region RatingValueSystem
+            InternalRatingValue = RatingValue.Generic;
+            #endregion
         }
 
         public override void OnAfterDuped(Item newItem)
@@ -2035,7 +2040,18 @@ namespace Server.Items
             {
                 m_Altered = value;
                 InvalidateProperties();
-            }
+            }        
         }
+
+        #region RatingValueSystem
+        public override void AddItemRatingProperty(ObjectPropertyList list)
+        {
+	        RatingEngine.AddRating(this.Rating, list, () =>
+	        {
+		        this.InternalRatingValue = BaseClothingRating.GetRating(this);
+		        return this.Rating;
+	        });
+        }
+        #endregion
     }
 }

@@ -38,6 +38,10 @@ namespace Server.Mobiles
                 Add(new GenericBuyInfo(typeof(Tourmaline), 75, 20, 0x0F18, 0, true));
                 Add(new GenericBuyInfo(typeof(Amber), 50, 20, 0xF25, 0, true));
                 Add(new GenericBuyInfo(typeof(Diamond), 200, 20, 0xF26, 0, true));
+                
+                #region RatingValueSystem
+                Add(new GenericBuyInfo(typeof(IDWand), 2500, 20, Utility.RandomList(0xDF2, 0xDF3, 0xDF4, 0xDF5), 0));
+            	#endregion
             }
         }
 

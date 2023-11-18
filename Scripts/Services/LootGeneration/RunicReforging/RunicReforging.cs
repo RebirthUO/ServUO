@@ -6,6 +6,7 @@ using Server.Targeting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.RebirthUO.Modules.RatingValueSystem;
 
 namespace Server.Items
 {
@@ -2535,6 +2536,13 @@ namespace Server.Items
             {
                 ((ICombatEquipment)item).ItemPower = ip;
             }
+            
+			#region RatingValueSystem
+            if (GenericRating.CanBeReevaluated(item.Rating))
+            {
+	            item.Rating = RatingValue.Generic;
+            }
+            #endregion
 
             return ip;
         }

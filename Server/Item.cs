@@ -14,6 +14,7 @@ using Server.Items;
 using Server.Network;
 using Server.RebirthUO.CustomDataSerializer;
 using Server.RebirthUO.CustomModuleMarker;
+using Server.RebirthUO.Modules.RatingValueSystem;
 using Server.Targeting;
 #endregion
 
@@ -1690,6 +1691,10 @@ namespace Server
 			}
 
 			AddItemPowerProperties(list);
+			
+			#region RatingValueSystem
+			AddItemRatingProperty(list);
+			#endregion
 		}
 
 		/// <summary>
@@ -6863,6 +6868,10 @@ namespace Server
 					}
 				}
 			}, this);
+			
+			#region RatingValueSystem
+			InternalRatingValue = RatingValue.None;
+			#endregion
 		}
 
 		public Item(Serial serial)
@@ -6995,14 +7004,52 @@ namespace Server
 		[CustomModule(CustomModule.Serialization)]
 		public virtual void WriteCustomData(GenericWriter writer)
 		{
-			writer.Write(0);
+			writer.Write(1);
+			
+			#region RatingValueSystem
+			writer.Write(InternalRatingValue);
+			#endregion
 		}
 
 		[CustomModule(CustomModule.Serialization)]
 		public virtual void ReadCustomData(GenericReader reader)
 		{
-			reader.ReadInt();
+			var version = reader.ReadInt();
+
+			switch (version)
+			{
+				#region RatingValueSystem
+				case 1:
+				{
+					InternalRatingValue = reader.ReadEnum<RatingValue>();
+					break;
+				}
+				#endregion
+			}
 		}
+
+		#region RatingValueSystem
+		[CustomModule(CustomModule.ValueRating)]
+		public virtual void AddItemRatingProperty(ObjectPropertyList list)
+		{
+			RatingEngine.AddRating(Rating, list);
+		}
+
+		[CustomModule(CustomModule.ValueRating)]
+		protected RatingValue InternalRatingValue { get; set; }
+
+		[CommandProperty(AccessLevel.Counselor, AccessLevel.GameMaster)]
+		[CustomModule(CustomModule.ValueRating)]
+		public RatingValue Rating
+		{
+			get => InternalRatingValue;
+			set
+			{
+				InternalRatingValue = value;
+				InvalidateProperties();
+			}
+		}
+		#endregion
 	}
 
 	[PropertyObject]

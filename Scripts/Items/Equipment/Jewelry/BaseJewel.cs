@@ -4,6 +4,7 @@ using Server.Misc;
 
 using System;
 using System.Collections.Generic;
+using Server.RebirthUO.Modules.RatingValueSystem;
 
 namespace Server.Items
 {
@@ -469,6 +470,10 @@ namespace Server.Items
             m_SAAbsorptionAttributes = new SAAbsorptionAttributes(this);
             m_NegativeAttributes = new NegativeAttributes(this);
             m_TalismanProtection = new TalismanAttribute();
+            
+            #region RatingValueSystem
+            InternalRatingValue = RatingValue.Generic;
+            #endregion
         }
 
         #region Stygian Abyss
@@ -1376,6 +1381,17 @@ namespace Server.Items
             }
 
             return 0;
+        }
+        #endregion
+
+        #region RatingValueSystem
+        public override void AddItemRatingProperty(ObjectPropertyList list)
+        {
+	        RatingEngine.AddRating(Rating, list, () =>
+	        {
+		        InternalRatingValue = BaseJewelValueRating.GetRating(this);
+		        return Rating;
+	        });
         }
         #endregion
     }

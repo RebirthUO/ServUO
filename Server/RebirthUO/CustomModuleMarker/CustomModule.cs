@@ -7,6 +7,7 @@ namespace Server.RebirthUO.CustomModuleMarker
 	public enum CustomModule
 	{
 		None,
-		Serialization
+		Serialization,
+		ValueRating
 	}
 }

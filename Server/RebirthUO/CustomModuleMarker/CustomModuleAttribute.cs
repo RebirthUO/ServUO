@@ -2,12 +2,14 @@
 // RebirthUO - CustomModuleAttribute.cs
 // **********
 
+using System;
+
 namespace Server.RebirthUO.CustomModuleMarker
 {
-	[System.AttributeUsage(System.AttributeTargets.Class | System.AttributeTargets.Struct |
-	                       System.AttributeTargets.Property | System.AttributeTargets.Method |
-	                       System.AttributeTargets.Interface)]
-	public class CustomModuleAttribute : System.Attribute
+	[AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct |
+	                AttributeTargets.Property | AttributeTargets.Method |
+	                AttributeTargets.Interface | AttributeTargets.Enum)]
+	public class CustomModuleAttribute : Attribute
 	{
 		public CustomModule Module { get; }
 

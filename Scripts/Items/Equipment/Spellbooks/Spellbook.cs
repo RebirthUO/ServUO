@@ -8,6 +8,8 @@ using Server.Spells.Mysticism;
 using Server.Targeting;
 using System;
 using System.Collections.Generic;
+using Server.RebirthUO.Modules.RatingValueSystem;
+
 #endregion
 
 namespace Server.Items
@@ -105,6 +107,10 @@ namespace Server.Items
             LootType = LootType.Blessed;
 
             Content = content;
+            
+            #region RatingValueSystem
+            InternalRatingValue = RatingValue.Generic;
+            #endregion
         }
 
         public Spellbook(Serial serial)
@@ -1305,5 +1311,16 @@ namespace Server.Items
                 from.SendLocalizedMessage(500015); // You do not have that spell!
             }
         }
+        
+        #region RatingValueSystem
+        public override void AddItemRatingProperty(ObjectPropertyList list)
+        {
+	        RatingEngine.AddRating(Rating, list, () =>
+	        {
+		        InternalRatingValue = BaseSpellBookRating.GetRating(this);
+		        return Rating;
+	        });
+        }
+        #endregion
     }
 }

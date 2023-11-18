@@ -5,6 +5,7 @@ using Server.Misc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.RebirthUO.Modules.RatingValueSystem;
 
 namespace Server.Items
 {
@@ -242,6 +243,10 @@ namespace Server.Items
             m_SetSkillBonuses = new AosSkillBonuses(this);
             DamageIncrease = 10;
             IsArrowAmmo = true;
+            
+            #region RatingValueSystem
+            InternalRatingValue = RatingValue.Generic;
+            #endregion
         }
 
         public BaseQuiver(Serial serial)
@@ -1280,5 +1285,16 @@ namespace Server.Items
                 m.SendLocalizedMessage(1072673); //There are no source containers nearby.
             }
         }
+
+        #region RatingValueSystem        
+        public override void AddItemRatingProperty(ObjectPropertyList list)
+        {
+	        RatingEngine.AddRating(Rating, list, () =>
+	        {
+		        InternalRatingValue = BaseQuiverRating.GetRating(this);
+		        return Rating;
+	        });
+        }
+        #endregion
     }
 }
