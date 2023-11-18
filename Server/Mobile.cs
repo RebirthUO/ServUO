@@ -12643,7 +12643,7 @@ namespace Server
 		public virtual void OnSectorDeactivate()
 		{ }
 
-		[CustomModule(CustomModule.Serialization)]
+		[CustomModuleLink(CustomModule.Serialization)]
 		public virtual void WriteCustomData(GenericWriter writer)
 		{
 			writer.Write(1);
@@ -12653,7 +12653,7 @@ namespace Server
 			#endregion
 		}
 
-		[CustomModule(CustomModule.Serialization)]
+		[CustomModuleLink(CustomModule.Serialization)]
 		public virtual void ReadCustomData(GenericReader reader)
 		{
 			var version = reader.ReadInt();
@@ -12671,11 +12671,11 @@ namespace Server
 		}
 
 		#region RatingValueSystem
-		[CustomModule(CustomModule.ValueRating)]
+		[CustomModuleLink(CustomModule.ValueRating)]
 		protected RatingValue InternalRatingValue { get; set; }
 
 		[CommandProperty(AccessLevel.Counselor, AccessLevel.GameMaster)]
-		[CustomModule(CustomModule.ValueRating)]
+		[CustomModuleLink(CustomModule.ValueRating)]
 		public RatingValue Rating
 		{
 			get => InternalRatingValue;
@@ -12686,7 +12686,7 @@ namespace Server
 			}
 		}
 
-		[CustomModule(CustomModule.ValueRating)]
+		[CustomModuleLink(CustomModule.ValueRating)]
 		public virtual void AddItemRatingProperty(ObjectPropertyList list)
 		{			
 			RatingEngine.AddRating(Rating, list);

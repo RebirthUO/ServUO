@@ -9,11 +9,11 @@ namespace Server.RebirthUO.CustomModuleMarker
 	[AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct |
 	                AttributeTargets.Property | AttributeTargets.Method |
 	                AttributeTargets.Interface | AttributeTargets.Enum)]
-	public class CustomModuleAttribute : Attribute
+	public class CustomModuleLinkAttribute : Attribute
 	{
 		public CustomModule Module { get; }
 
-		public CustomModuleAttribute(CustomModule module)
+		public CustomModuleLinkAttribute(CustomModule module)
 		{
 			Module = module;
 		}

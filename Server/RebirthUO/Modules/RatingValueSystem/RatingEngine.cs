@@ -9,7 +9,7 @@ using Server.RebirthUO.Helper;
 
 namespace Server.RebirthUO.Modules.RatingValueSystem
 {
-	[CustomModule(CustomModule.ValueRating)]
+	[CustomModuleLink(CustomModule.ValueRating)]
 	public static class RatingEngine
 	{
 		public static void AddRating(RatingValue rating, ObjectPropertyList list,

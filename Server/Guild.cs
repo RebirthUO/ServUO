@@ -124,13 +124,13 @@ namespace Server.Guilds
 			return System.String.Format("0x{0:X} \"{1} [{2}]\"", m_Id, Name, Abbreviation);
 		}
 
-		[CustomModule(CustomModule.Serialization)]
+		[CustomModuleLink(CustomModule.Serialization)]
 		public virtual void WriteCustomData(GenericWriter writer)
 		{
 			writer.Write(0);
 		}
 
-		[CustomModule(CustomModule.Serialization)]
+		[CustomModuleLink(CustomModule.Serialization)]
 		public virtual void ReadCustomData(GenericReader reader)
 		{
 			reader.ReadInt();

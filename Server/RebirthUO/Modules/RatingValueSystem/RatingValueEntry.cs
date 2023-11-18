@@ -8,7 +8,7 @@ using Server.RebirthUO.CustomModuleMarker;
 
 namespace Server.RebirthUO.Modules.RatingValueSystem
 {
-	[CustomModule(CustomModule.ValueRating)]
+	[CustomModuleLink(CustomModule.ValueRating)]
 	public class RatingValueEntry
 	{
 		public static RatingValueEntry Common => new RatingValueEntry(RatingValue.Common, Color.White, "Common");

@@ -7,7 +7,7 @@ using Server.RebirthUO.CustomModuleMarker;
 
 namespace Server.RebirthUO.Modules.RatingValueSystem
 {
-	[CustomModule(CustomModule.ValueRating)]
+	[CustomModuleLink(CustomModule.ValueRating)]
 	public static class BaseTalismanRating
 	{
 		public static RatingValue GetRating(BaseTalisman talisman)

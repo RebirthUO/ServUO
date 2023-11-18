@@ -6,7 +6,7 @@ using Server.RebirthUO.CustomModuleMarker;
 
 namespace Server.RebirthUO.Modules.RatingValueSystem
 {
-	[CustomModule(CustomModule.ValueRating)]
+	[CustomModuleLink(CustomModule.ValueRating)]
 	public enum RatingValue
 	{
 		None,

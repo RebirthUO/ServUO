@@ -7,7 +7,7 @@ using Server.RebirthUO.CustomModuleMarker;
 
 namespace Server.RebirthUO.Modules.RatingValueSystem
 {
-	[CustomModule(CustomModule.ValueRating)]
+	[CustomModuleLink(CustomModule.ValueRating)]
 	public static class BaseArmorValueRating
 	{
 		public static RatingValue GetRating(BaseArmor armor)

@@ -6,7 +6,7 @@ using Server.RebirthUO.CustomModuleMarker;
 
 namespace Server.RebirthUO.CustomDataSerializer
 {
-	[CustomModule(CustomModule.Serialization)]
+	[CustomModuleLink(CustomModule.Serialization)]
 	public interface ICustomData
 	{
 		void WriteCustomData(GenericWriter writer);

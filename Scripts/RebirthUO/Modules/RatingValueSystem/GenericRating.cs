@@ -8,7 +8,7 @@ using Server.SkillHandlers;
 
 namespace Server.RebirthUO.Modules.RatingValueSystem
 {
-	[CustomModule(CustomModule.ValueRating)]
+	[CustomModuleLink(CustomModule.ValueRating)]
 	public static class GenericRating
 	{
 		public static RatingValue GetRating(Item item, double limit)
