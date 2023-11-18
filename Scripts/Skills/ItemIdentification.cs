@@ -4,6 +4,7 @@ using Server.SkillHandlers;
 using Server.Targeting;
 using System;
 using System.Collections.Generic;
+using Server.RebirthUO.Modules.PropertySealing;
 using Server.RebirthUO.Modules.RatingValueSystem;
 
 namespace Server.Items
@@ -65,6 +66,13 @@ namespace Server.Items
                     from.PrivateOverheadMessage(MessageType.Emote, 0x3B2, item.LabelNumber, from.NetState);
                     item.PrivateOverheadMessage(MessageType.Label, 0x3B2, item.LabelNumber, from.NetState);
                 }
+
+                #region Property Sealing
+                if (PropertySealingEngine.Identify(from, item))
+                {
+	                return;
+                }
+                #endregion
 
                 #region RatingValueSystem               
                 if (GenericRating.CanBeReevaluated(item.Rating))

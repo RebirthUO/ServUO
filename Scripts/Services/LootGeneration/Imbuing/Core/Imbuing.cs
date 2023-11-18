@@ -65,7 +65,14 @@ namespace Server.SkillHandlers
         }
 
         public static bool CanImbueItem(Mobile from, Item item)
-        {
+        {	
+	        #region Property Sealing        
+	        if (item.HideProperties)
+	        {
+		        from.SendLocalizedMessage(1079576); // You cannot imbue this item.
+		        return false;
+	        }
+	        #endregion
             if (!CheckSoulForge(from, 2))
             {
                 return false;
@@ -133,6 +140,16 @@ namespace Server.SkillHandlers
 
         public static bool CanUnravelItem(Mobile from, Item item, bool message = true)
         {
+	        #region Property Sealing     
+	        if (item.HideProperties)
+	        {
+		        if (message)
+			        from.SendLocalizedMessage(1080425); // You cannot magically unravel this item.
+		        
+		        return false;
+	        }
+	        #endregion
+	        
             if (!CheckSoulForge(from, 2, false, false))
             {
                 from.SendLocalizedMessage(1080433); // You must be near a soulforge to magically unravel an item.

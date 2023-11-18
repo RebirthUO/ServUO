@@ -868,6 +868,9 @@ namespace Server
 
                     if (loot != null)
                     {
+	                    #region Property Sealing
+	                    loot.HideProperties = true;
+	                    #endregion
                         return Mutate(from, luckChance, loot);
                     }
                 }

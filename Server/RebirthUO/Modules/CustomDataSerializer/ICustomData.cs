@@ -2,9 +2,9 @@
 // ServUO - ICustomData.cs
 // **********
 
-using Server.RebirthUO.CustomModuleMarker;
+using Server.RebirthUO.Modules.CustomModuleMarker;
 
-namespace Server.RebirthUO.CustomDataSerializer
+namespace Server.RebirthUO.Modules.CustomDataSerializer
 {
 	[CustomModuleLink(CustomModule.Serialization)]
 	public interface ICustomData

@@ -8,6 +8,7 @@ using AMT = Server.Items.ArmorMaterialType;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.RebirthUO.Modules.PropertySealing;
 using Server.RebirthUO.Modules.RatingValueSystem;
 
 namespace Server.Items
@@ -2964,6 +2965,20 @@ namespace Server.Items
 		        this.InternalRatingValue = BaseArmorValueRating.GetRating(this);
 		        return this.Rating;
 	        });
+        }
+        #endregion
+        
+        #region Property Sealing
+        public override void GetProperties(ObjectPropertyList list)
+        {
+	        if (HideProperties)
+	        {
+		        PropertySealingEngine.SealProperties(this, list, () => AddCraftedProperties(list));
+	        }
+	        else
+	        {
+		        base.GetProperties(list);
+	        }
         }
         #endregion
     }

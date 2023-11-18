@@ -8,6 +8,7 @@ using Server.Spells.Necromancy;
 using Server.Spells.Second;
 using Server.Targeting;
 using System;
+using Server.RebirthUO.Modules.PropertySealing;
 using Server.RebirthUO.Modules.RatingValueSystem;
 
 namespace Server.Items
@@ -731,7 +732,15 @@ namespace Server.Items
 
         public override void GetProperties(ObjectPropertyList list)
         {
-            base.GetProperties(list);
+	        #region Property Sealing
+	        if (HideProperties)
+	        {
+		        PropertySealingEngine.SealProperties(this, list, () => AddCraftedProperties(list));
+		        return;
+	        }
+	        #endregion
+
+	        base.GetProperties(list);
 
             if (Attributes.Brittle > 0)
                 list.Add(1116209); // Brittle           

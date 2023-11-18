@@ -17,6 +17,7 @@ using Server.Misc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.RebirthUO.Modules.PropertySealing;
 using Server.RebirthUO.Modules.RatingValueSystem;
 
 #endregion
@@ -5239,6 +5240,20 @@ namespace Server.Items
         }
         #endregion
 
+        #region Property Sealing
+        public override void GetProperties(ObjectPropertyList list)
+        {
+	        if (HideProperties)
+	        {
+		        PropertySealingEngine.SealProperties(this, list, () => AddCraftedProperties(list));
+	        }
+	        else
+	        {
+		        base.GetProperties(list);
+	        }
+        }
+        #endregion
+        
         public virtual void DistributeMaterialBonus(CraftAttributeInfo attrInfo)
         {
             if (m_Resource != CraftResource.Heartwood)

@@ -8,6 +8,7 @@ using Server.Spells.Mysticism;
 using Server.Targeting;
 using System;
 using System.Collections.Generic;
+using Server.RebirthUO.Modules.PropertySealing;
 using Server.RebirthUO.Modules.RatingValueSystem;
 
 #endregion
@@ -1320,6 +1321,20 @@ namespace Server.Items
 		        InternalRatingValue = BaseSpellBookRating.GetRating(this);
 		        return Rating;
 	        });
+        }
+        #endregion
+        
+        #region Property Sealing
+        public override void GetProperties(ObjectPropertyList list)
+        {
+	        if (HideProperties)
+	        {
+		        PropertySealingEngine.SealProperties(this, list, () => AddCraftedProperties(list));
+	        }
+	        else
+	        {
+		        base.GetProperties(list);
+	        }
         }
         #endregion
     }

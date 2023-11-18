@@ -3,7 +3,7 @@
 // **********
 
 using System;
-using Server.RebirthUO.CustomModuleMarker;
+using Server.RebirthUO.Modules.CustomModuleMarker;
 using Server.SkillHandlers;
 
 namespace Server.RebirthUO.Modules.RatingValueSystem

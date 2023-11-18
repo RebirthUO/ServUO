@@ -12,8 +12,9 @@ using System.Threading;
 using Server.ContextMenus;
 using Server.Items;
 using Server.Network;
-using Server.RebirthUO.CustomDataSerializer;
-using Server.RebirthUO.CustomModuleMarker;
+using Server.RebirthUO.Modules.CustomDataSerializer;
+using Server.RebirthUO.Modules.CustomModuleMarker;
+using Server.RebirthUO.Modules.PropertySealing;
 using Server.RebirthUO.Modules.RatingValueSystem;
 using Server.Targeting;
 #endregion
@@ -1562,19 +1563,9 @@ namespace Server
 		/// </summary>
 		public virtual void AddWeightProperty(ObjectPropertyList list)
 		{
-			if (DisplayWeight && Weight > 0)
-			{
-				var weight = PileWeight + TotalWeight;
-
-				if (weight == 1)
-				{
-					list.Add(1072788, weight.ToString()); //Weight: ~1_WEIGHT~ stone
-				}
-				else
-				{
-					list.Add(1072789, weight.ToString()); //Weight: ~1_WEIGHT~ stones
-				}
-			}
+			#region Property Sealing
+			PropertySealingEngine.AddWeightProperty(this,list);
+			#endregion
 		}
 
 		/// <summary>
@@ -1697,6 +1688,16 @@ namespace Server
 			#endregion
 		}
 
+		#region Property Sealing
+		[CustomModuleLink(CustomModule.PropertySealing)]
+		public virtual void AddPropertySealingProperty(ObjectPropertyList list)
+		{
+			if (HideProperties)
+			{
+				PropertySealingEngine.SealProperties(this, list);
+			}
+		}
+		#endregion
 		/// <summary>
 		///     Overridable. Event invoked when a child (<paramref name="item" />) is building it's <see cref="ObjectPropertyList" />. Recursively calls
 		///     <see
@@ -1849,7 +1850,9 @@ namespace Server
 
 		public virtual bool CanEquip(Mobile m)
 		{
-			return m_Layer != Layer.Invalid && m.FindItemOnLayer(m_Layer) == null && CheckEquip(m, true);
+			#region Property Sealing
+			return (!HideProperties) &&m_Layer != Layer.Invalid && m.FindItemOnLayer(m_Layer) == null && CheckEquip(m, true);
+			#endregion
 		}
 
 		public virtual bool CheckEquip(Mobile m, bool message)
@@ -6872,6 +6875,9 @@ namespace Server
 			#region RatingValueSystem
 			InternalRatingValue = RatingValue.None;
 			#endregion
+			#region Property Sealing
+			HideProperties = false;
+			#endregion
 		}
 
 		public Item(Serial serial)
@@ -7000,11 +7006,30 @@ namespace Server
 			return Sockets.Any(s => s.GetType() == t);
 		}
 		#endregion
-
+		#region Property Sealing
+		[CustomModuleLink(CustomModule.PropertySealing)]
+		private bool m_HideProperties { get; set; }
+		
+		[CustomModuleLink(CustomModule.PropertySealing)]
+		[CommandProperty(AccessLevel.Counselor, AccessLevel.GameMaster)]
+		public bool HideProperties {
+			get => m_HideProperties;
+			set
+			{
+				m_HideProperties = value;
+				InvalidateProperties();
+			}
+		}
+		#endregion
+		
 		[CustomModuleLink(CustomModule.Serialization)]
 		public virtual void WriteCustomData(GenericWriter writer)
 		{
-			writer.Write(1);
+			writer.Write(2);
+			
+			#region Property Sealing
+			writer.Write(HideProperties);
+			#endregion
 			
 			#region RatingValueSystem
 			writer.Write(InternalRatingValue);
@@ -7018,6 +7043,13 @@ namespace Server
 
 			switch (version)
 			{
+				#region Property Sealing
+				case 2:
+				{
+					m_HideProperties = reader.ReadBool();
+					goto case 1;
+				}
+				#endregion
 				#region RatingValueSystem
 				case 1:
 				{

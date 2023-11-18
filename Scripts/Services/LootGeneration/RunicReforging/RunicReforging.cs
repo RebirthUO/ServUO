@@ -72,7 +72,15 @@ namespace Server.Items
     public static class RunicReforging
     {
         public static bool CanReforge(Mobile from, Item item, CraftSystem crsystem)
-        {
+        {	        
+	        #region Property Sealing
+	        if (item.HideProperties)
+	        {
+		        from.SendLocalizedMessage(1152113); // You cannot reforge that item.
+		        return false;
+	        }
+	        #endregion
+	        
             bool allowableSpecial = m_AllowableTable.ContainsKey(item.GetType());
             CraftSystem system = null;
 
@@ -1907,6 +1915,10 @@ namespace Server.Items
 
             if (item != null)
             {
+	            #region Property Sealing
+	            item.HideProperties = true;
+	            #endregion
+	            
                 int budget = basebudget;
 
                 if (killer is BaseCreature bc && bc.Controlled)

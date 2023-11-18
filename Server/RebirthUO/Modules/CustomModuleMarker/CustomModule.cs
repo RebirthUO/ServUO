@@ -2,12 +2,13 @@
 // RebirthUO - CustomModule.cs
 // **********
 
-namespace Server.RebirthUO.CustomModuleMarker
+namespace Server.RebirthUO.Modules.CustomModuleMarker
 {
 	public enum CustomModule
 	{
 		None,
 		Serialization,
-		ValueRating
+		ValueRating,
+		PropertySealing
 	}
 }

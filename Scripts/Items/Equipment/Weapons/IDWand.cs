@@ -8,6 +8,9 @@ namespace Server.Items
         public IDWand()
             : base(WandEffect.Identification, 25, 175)
         {
+	        #region Property Sealing
+	        HideProperties = false;
+	        #endregion
         }
 
         public IDWand(Serial serial)
@@ -31,7 +34,16 @@ namespace Server.Items
         }
 
         public override bool OnWandTarget(Mobile from, object o)
-        {
+        {	  
+
+	        #region Property Sealing	        
+	        if (o is Item item)
+	        {
+		        item.HideProperties = false;
+		        item.InvalidateProperties();
+	        }
+	        #endregion
+	        
             if (o is BaseWeapon)
                 ((BaseWeapon)o).Identified = true;
             else if (o is BaseArmor)

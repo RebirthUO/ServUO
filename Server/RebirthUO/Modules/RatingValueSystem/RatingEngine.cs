@@ -4,8 +4,8 @@
 
 
 using System;
-using Server.RebirthUO.CustomModuleMarker;
 using Server.RebirthUO.Helper;
+using Server.RebirthUO.Modules.CustomModuleMarker;
 
 namespace Server.RebirthUO.Modules.RatingValueSystem
 {

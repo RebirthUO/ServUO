@@ -2,7 +2,8 @@
 // ServUO - RatingValue.cs
 // **********
 
-using Server.RebirthUO.CustomModuleMarker;
+
+using Server.RebirthUO.Modules.CustomModuleMarker;
 
 namespace Server.RebirthUO.Modules.RatingValueSystem
 {

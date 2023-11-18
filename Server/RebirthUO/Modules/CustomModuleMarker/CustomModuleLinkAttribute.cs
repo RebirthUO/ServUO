@@ -4,7 +4,7 @@
 
 using System;
 
-namespace Server.RebirthUO.CustomModuleMarker
+namespace Server.RebirthUO.Modules.CustomModuleMarker
 {
 	[AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct |
 	                AttributeTargets.Property | AttributeTargets.Method |

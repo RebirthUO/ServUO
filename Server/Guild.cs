@@ -1,7 +1,7 @@
 #region References
 using System.Collections.Generic;
-using Server.RebirthUO.CustomDataSerializer;
-using Server.RebirthUO.CustomModuleMarker;
+using Server.RebirthUO.Modules.CustomDataSerializer;
+using Server.RebirthUO.Modules.CustomModuleMarker;
 
 #endregion
 

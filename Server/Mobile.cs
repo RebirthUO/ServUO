@@ -17,8 +17,8 @@ using Server.Menus;
 using Server.Mobiles;
 using Server.Network;
 using Server.Prompts;
-using Server.RebirthUO.CustomDataSerializer;
-using Server.RebirthUO.CustomModuleMarker;
+using Server.RebirthUO.Modules.CustomDataSerializer;
+using Server.RebirthUO.Modules.CustomModuleMarker;
 using Server.RebirthUO.Modules.RatingValueSystem;
 using Server.Targeting;
 #endregion
