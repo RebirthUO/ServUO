@@ -28,7 +28,7 @@ namespace Server.RebirthUO.Modules.CustomChampionSystem.Items
 		private Rectangle2D _SpawnArea;
 		private int InternalKills { get; set; }
 		private SuperChampionPlatform<T> Platform { get; set; }
-		private SuperChampionAltar<T> Altar { get; set; }
+		protected SuperChampionAltar<T> Altar { get; set; }
 		private SuperIdolOfTheChampion<T> Idol { get; set; }
 		private SuperChampionSpawnRegion<T> Region { get; set; }
 		private bool InternalActive { get; set; }
