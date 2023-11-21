@@ -945,7 +945,28 @@ namespace Server.Items
 
             ApplyAttributesTo(weapon, true, 0, attributeCount, min, max);
         }
+        
+        #region Extended Craft System
+        public void ApplyAttributesTo(BaseJewel baseJewel)
+        {
+	        CraftResourceInfo resInfo = CraftResources.GetInfo(Resource);
 
+	        if (resInfo == null)
+		        return;
+
+	        CraftAttributeInfo attrs = resInfo.AttributeInfo;
+
+	        if (attrs == null)
+		        return;
+
+	        int attributeCount = Utility.RandomMinMax(attrs.RunicMinAttributes, attrs.RunicMaxAttributes);
+	        int min = attrs.RunicMinIntensity;
+	        int max = attrs.RunicMaxIntensity;
+
+	        ApplyAttributesTo(baseJewel, true, 0, attributeCount, min, max);
+        }
+        #endregion
+        
         public void ApplyAttributesTo(BaseArmor armor)
         {
             CraftResourceInfo resInfo = CraftResources.GetInfo(Resource);

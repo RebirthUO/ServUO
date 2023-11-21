@@ -1202,6 +1202,13 @@ namespace Server.Items
             if (makersMark)
                 m_Crafter = from;
             #endregion
+            
+            #region Extended Craft System
+            if (tool is BaseRunicTool runicTool && !craftItem.ForceNonExceptional)
+            {
+	            runicTool.ApplyAttributesTo(this);
+            }
+            #endregion
 
             return 1;
         }
